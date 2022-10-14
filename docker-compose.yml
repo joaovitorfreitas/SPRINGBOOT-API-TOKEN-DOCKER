@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  server:
+    build: .
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql_teste
+  mysql_teste:
+    container_name: mysql_teste_web
+    image: "mysql:5.6"
+    volumes:
+      - ./docker-spring-boot/docker/volume_mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_DATABASE=ApiJava
+      - MYSQL_ROOT_PASSWORD=root
